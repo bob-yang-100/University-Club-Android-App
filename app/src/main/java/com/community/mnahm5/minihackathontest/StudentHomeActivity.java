@@ -136,11 +136,11 @@ public class StudentHomeActivity extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(), CreateClubActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_payments) {
-
+                fragment = StudentPaymentsFragment.newInstance();
             } else if (id == R.id.nav_settings) {
-
+                fragment = StudentSettingsFragment.newInstance();
             } else if (id == R.id.nav_help) {
-
+                fragment = StudentHelpFragment.newInstance();
             } else if (id == R.id.nav_logout) {
                 ParseUser.logOutInBackground(new LogOutCallback() {
                     @Override
