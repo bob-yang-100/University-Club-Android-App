@@ -26,6 +26,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void SignUp(View view) {
+        //Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
+        //startActivity(intent);
+
         final EditText etStudentId = (EditText) findViewById(R.id.etStudentID);
         final EditText etFullName = (EditText) findViewById(R.id.etFullName);
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
