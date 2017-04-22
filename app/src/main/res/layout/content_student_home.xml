@@ -8,4 +8,12 @@
     tools:context="com.community.mnahm5.minihackathontest.StudentHomeActivity"
     tools:showIn="@layout/app_bar_student_home">
 
+    <TextView
+        android:id="@+id/tx_welcome_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome, boiii! "
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="38dp" />
 </android.support.constraint.ConstraintLayout>
