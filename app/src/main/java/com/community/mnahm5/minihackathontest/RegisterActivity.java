@@ -17,6 +17,9 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        redirect();
+
         setContentView(R.layout.activity_register);
     }
 
@@ -53,5 +56,12 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void redirect() {
+        if (ParseUser.getCurrentUser() != null) {
+            Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
+            startActivity(intent);
+        }
     }
 }

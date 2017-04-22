@@ -18,12 +18,16 @@ import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import static com.community.mnahm5.minihackathontest.R.id.etUsername;
+import static com.community.mnahm5.minihackathontest.R.id.start;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        redirect();
+
         setContentView(R.layout.activity_main);
     }
 
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void loginClicked(View view){
         EditText etusername = (EditText) findViewById(R.id.etUsername);
         EditText etpassword = (EditText) findViewById(R.id.etPassword);
-        final String username = etusername.getText().toString().trim();
+        String username = etusername.getText().toString().trim();
         String password = etpassword.getText().toString().trim();
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
             Toast.makeText(getApplicationContext(), "Username/Password can't be empty", Toast.LENGTH_LONG).show();
@@ -54,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+        }
+    }
+
+    public void redirect() {
+        if (ParseUser.getCurrentUser() != null) {
+            Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
+            startActivity(intent);
         }
     }
 }
