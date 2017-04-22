@@ -22,13 +22,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ParseSetup();
         setContentView(R.layout.activity_main);
-//        Intent intent = new Intent(this, StudentHomeActivity.class);
-//        startActivity(intent);
     }
 
     public void signupClicked(View view){
-        //Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void loginClicked(View view){
+        Intent intent = new Intent(this, StudentHomeActivity.class);
         startActivity(intent);
     }
 
