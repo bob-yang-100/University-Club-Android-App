@@ -3,37 +3,34 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:title="@string/home" />
+        <item
             android:id="@+id/nav_friends"
-            android:title="Friends" />
+            android:title="@string/friends" />
         <item
             android:id="@+id/nav_clubs"
-
-            android:title="Clubs" />
+            android:title="@string/clubs" />
         <item
             android:id="@+id/nav_payments"
-
-            android:title="Payments" />
+            android:title="@string/payments" />
         <item
             android:id="@+id/nav_settings"
-
-            android:title="Settings" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/nav_help"
-
-            android:title="Help/About" />
+            android:title="@string/help" />
         <item
             android:id="@+id/nav_club_admin_settings"
-
-            android:title="Club Settings"
+            android:title="@string/club_settings"
             android:visible="false" />
     </group>
 
-    <item android:title="Logout">
+    <item android:title="@string/logout">
         <menu>
             <item
                 android:id="@+id/nav_logout"
-
-                android:title="Are you sure?" />
+                android:title="@string/are_you_sure" />
         </menu>
     </item>
 
