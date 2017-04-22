@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ParseSetup();
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, StudentHomeActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, StudentHomeActivity.class);
+//        startActivity(intent);
     }
 
     public void signupClicked(View view){
