@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,11 +16,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,6 +46,21 @@ public class StudentHomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Menu menuNav=navigationView.getMenu();
+        final MenuItem admin_settings = (MenuItem) menuNav.findItem(R.id.nav_club_admin_settings);
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Clubs");
+        ArrayList<String> admins = new ArrayList<>();
+        admins.add(ParseUser.getCurrentUser().getUsername());
+        query.whereContainedIn("admins", admins);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (objects.size() > 0) {
+                    admin_settings.setVisible(true);
+                }
+            }
+        });
 
     }
 
@@ -104,17 +126,13 @@ public class StudentHomeActivity extends AppCompatActivity
                     }
                 }
             });
+        } else if (id == R.id.nav_club_admin_settings) {
+            Intent intent = new Intent(getApplicationContext(), ClubSettingsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public boolean isClubAdmin(){
-        ParseQuery query = ParseQuery.getQuery("Clubs");
-        //query.whereContainedIn("admins", )
-
-        return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.community.mnahm5.minihackathontest;
 
+import android.content.Intent;
 import android.icu.text.UnicodeSetSpanner;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +40,8 @@ public class CreateClubActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     Toast.makeText(getApplicationContext(), "Club Created", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
+                    startActivity(intent);
                 }
                 else {
                     Log.i("Error", e.getMessage());
