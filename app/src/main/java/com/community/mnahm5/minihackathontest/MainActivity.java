@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ParseSetup();
         setContentView(R.layout.activity_main);
+        Intent quickthing = new Intent(this, RegisterActivity.class);
+        startActivity(quickthing);
     }
 
     private void ParseSetup()
