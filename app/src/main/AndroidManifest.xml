@@ -20,8 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity
+            android:name=".StudentHomeActivity"
+            android:label="@string/title_activity_student_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ClubHomeActivity"
+            android:label="@string/title_activity_club_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
