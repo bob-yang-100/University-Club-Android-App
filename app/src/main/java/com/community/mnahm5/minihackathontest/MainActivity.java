@@ -21,30 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ParseSetup();
         setContentView(R.layout.activity_main);
-
-        ParseObject parseObject = new ParseObject("Test");
-        parseObject.put("name", "Nadim");
-        parseObject.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Test Success",
-                            Toast.LENGTH_LONG
-                    ).show();
-                    Log.i("Parse", "Success");
-                }
-                else {
-                    Toast.makeText(
-                            getApplicationContext(),
-                            "Test Failed\n" + e.getMessage(),
-                            Toast.LENGTH_LONG
-                    ).show();
-                    Log.i("Parse", "Failed " + e.getMessage());
-                }
-            }
-        });
     }
 
     private void ParseSetup()
