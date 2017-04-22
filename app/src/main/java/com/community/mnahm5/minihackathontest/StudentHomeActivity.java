@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 public class StudentHomeActivity extends AppCompatActivity
@@ -108,5 +109,12 @@ public class StudentHomeActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public boolean isClubAdmin(){
+        ParseQuery query = ParseQuery.getQuery("Clubs");
+        //query.whereContainedIn("admins", )
+
+        return false;
     }
 }

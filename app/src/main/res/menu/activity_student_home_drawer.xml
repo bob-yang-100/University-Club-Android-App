@@ -21,6 +21,11 @@
             android:id="@+id/nav_help"
 
             android:title="Help/About" />
+        <item
+            android:id="@+id/nav_club_admin_settings"
+
+            android:title="Club Settings"
+            android:visible="false" />
     </group>
 
     <item android:title="Logout">
