@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -37,6 +38,7 @@ public class StudentHomeActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -80,7 +82,8 @@ public class StudentHomeActivity extends AppCompatActivity
         if (id == R.id.nav_friends) {
             // Handle the camera action
         } else if (id == R.id.nav_clubs) {
-
+            Intent intent = new Intent(getApplicationContext(), CreateClubActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_payments) {
 
         } else if (id == R.id.nav_settings) {

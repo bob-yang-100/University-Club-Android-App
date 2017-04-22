@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public void loginClicked(View view){
         EditText etusername = (EditText) findViewById(R.id.etUsername);
         EditText etpassword = (EditText) findViewById(R.id.etPassword);
-        String username = etusername.getText().toString().trim();
+        final String username = etusername.getText().toString().trim();
         String password = etpassword.getText().toString().trim();
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
             Toast.makeText(getApplicationContext(), "Username/Password can't be empty", Toast.LENGTH_LONG).show();
