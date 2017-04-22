@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     public void signupClicked(View view){
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
-        
     }
 
     public void loginClicked(View view){
@@ -38,20 +37,23 @@ public class MainActivity extends AppCompatActivity {
         EditText etpassword = (EditText) findViewById(R.id.etPassword);
         String username = etusername.getText().toString().trim();
         String password = etpassword.getText().toString().trim();
-        ParseUser.logInInBackground(username, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-                if(user != null){
-                    Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
-                    startActivity(intent);
+        if(username == null || username.isEmpty() || password == null || password.isEmpty()){
+            Toast.makeText(getApplicationContext(), "Username/Password can't be empty", Toast.LENGTH_LONG).show();
+        }
+        else{
+            ParseUser.logInInBackground(username, password, new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    if(user != null){
+                        Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Username/Password is wrong", Toast.LENGTH_LONG).show();
+                    }
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "Username/Password is wrong", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        //Intent intent = new Intent(this, StudentHomeActivity.class);
-        //startActivity(intent);
+            });
+        }
     }
 }
