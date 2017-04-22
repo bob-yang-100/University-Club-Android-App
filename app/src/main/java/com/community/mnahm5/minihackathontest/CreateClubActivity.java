@@ -49,5 +49,4 @@ public class CreateClubActivity extends AppCompatActivity {
             }
         });
     }
-
 }
