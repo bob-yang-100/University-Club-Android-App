@@ -124,8 +124,6 @@ public class StudentHomeActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-
-
         try {
 
             if (id == R.id.nav_home) {
@@ -156,7 +154,7 @@ public class StudentHomeActivity extends AppCompatActivity
                     }
                 });
             } else if (id == R.id.nav_club_admin_settings) {
-                Intent intent = new Intent(getApplicationContext(), ClubSettingsActivity.class);
+                Intent intent = new Intent(getBaseContext(), ClubSettingsActivity.class);
                 startActivity(intent);
             }
 
@@ -164,8 +162,11 @@ public class StudentHomeActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        // If there is a fragment change...
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

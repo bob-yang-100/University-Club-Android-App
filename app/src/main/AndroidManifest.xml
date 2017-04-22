@@ -31,7 +31,14 @@
             android:label="@string/title_activity_club_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateClubActivity" />
-        <activity android:name=".ClubSettingsActivity"></activity>
+        <activity android:name=".ClubSettingsActivity"
+            android:parentActivityName=".StudentHomeActivity" >
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".StudentHomeActivity" />
+        </activity>
     </application>
 
 </manifest>
