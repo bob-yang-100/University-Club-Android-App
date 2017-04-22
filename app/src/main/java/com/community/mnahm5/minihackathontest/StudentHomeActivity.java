@@ -133,8 +133,9 @@ public class StudentHomeActivity extends AppCompatActivity
             } else if (id == R.id.nav_friends) {
                 fragment = StudentFriendsFragment.newInstance();
             } else if (id == R.id.nav_clubs) {
-                Intent intent = new Intent(getApplicationContext(), CreateClubActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getApplicationContext(), CreateClubActivity.class);
+//                startActivity(intent);
+                fragment = ClubListFragment.newInstance();
             } else if (id == R.id.nav_payments) {
                 fragment = StudentPaymentsFragment.newInstance();
             } else if (id == R.id.nav_settings) {

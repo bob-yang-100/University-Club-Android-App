@@ -69,26 +69,26 @@ public class CreateClubActivity extends AppCompatActivity {
         }
     }
 
-    public void addclubClicked(View view){
-        TextView clubname = (TextView) findViewById(R.id.etClubName);
-        String current_user = ParseUser.getCurrentUser().getUsername();
-        ParseObject clubs = new ParseObject("Clubs");
-        clubs.put("clubName", clubname.getText().toString());
-        List<String> admins = new ArrayList<>();
-        admins.add(current_user);
-        clubs.put("admins", admins);
-        clubs.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Toast.makeText(getApplicationContext(), "Club Created", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
-                    startActivity(intent);
-                }
-                else {
-                    Log.i("Error", e.getMessage());
-                }
-            }
-        });
-    }
+//    public void addclubClicked(View view){
+//        TextView clubname = (TextView) findViewById(R.id.etClubName);
+//        String current_user = ParseUser.getCurrentUser().getUsername();
+//        ParseObject clubs = new ParseObject("Clubs");
+//        clubs.put("clubName", clubname.getText().toString());
+//        List<String> admins = new ArrayList<>();
+//        admins.add(current_user);
+//        clubs.put("admins", admins);
+//        clubs.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    Toast.makeText(getApplicationContext(), "Club Created", Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
+//                    startActivity(intent);
+//                }
+//                else {
+//                    Log.i("Error", e.getMessage());
+//                }
+//            }
+//        });
+//    }
 }
