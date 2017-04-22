@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.parse.Parse;
@@ -21,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ParseSetup();
         setContentView(R.layout.activity_main);
+    }
+
+    public void signupClicked(View view){
+        //Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private void ParseSetup()
