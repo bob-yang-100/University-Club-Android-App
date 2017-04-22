@@ -30,6 +30,7 @@
             android:name=".ClubHomeActivity"
             android:label="@string/title_activity_club_home"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CreateClubActivity"></activity>
     </application>
 
 </manifest>
