@@ -1,101 +1,104 @@
 package com.community.mnahm5.minihackathontest;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class ClubHomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseClassName;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ClubHomeActivity extends AppCompatActivity {
+    private ParseObject update_row;
+    private List<String> members;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Bundle bundle = getIntent().getExtras();
+        String clubname = bundle.getString("CLUBNAME");
+        displayClubDetails(clubname);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Clubs");
+        query.whereEqualTo("clubName", clubname);
+        query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (objects.size() > 0 && e == null) {
+                    members = objects.get(0).getList("members");
+                    Log.i("test", "members " + members.size() + " length " + objects.size());
+                    members.add(ParseUser.getCurrentUser().getUsername());
+                    Log.i("test", "members " + members.size());
+                    update_row = objects.get(0);
+                }
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+    public void displayClubDetails(String clubname){
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Clubs");
+        query.whereEqualTo("clubName", clubname);
+        query.setLimit(1);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if(e == null){
+                    if(objects.size() > 0){
+                        TextView club_welcome = (TextView) findViewById(R.id.tvClubWelcome);
+                        TextView club_about = (TextView) findViewById(R.id.tvClubAbout);
+                        List<String> list_of_memmbers = objects.get(0).getList("members");
+                        TextView club_join_price = (TextView) findViewById(R.id.tvPrice);
+                        Button join = (Button) findViewById(R.id.btJoinClub);
+
+                        String welcome_message = "Welcome to " + objects.get(0).getString("clubName");
+                        club_welcome.setText(welcome_message);
+                        club_about.setText(objects.get(0).getString("description"));
+
+                        if(!list_of_memmbers.contains(ParseUser.getCurrentUser().getUsername())){
+                            club_join_price.setText("$"+objects.get(0).getString("fees"));
+                            club_join_price.setVisibility(View.VISIBLE);
+                            join.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            club_join_price.setVisibility(View.INVISIBLE);
+                            join.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+                }
+            }
+        });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.club_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    public void joinClubClicked(View view){
+        update_row.put("members", members);
+        if(update_row != null) Log.i("test", "found object");
+        update_row.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null){
+                    Toast.makeText(getApplicationContext(), "Joined Club", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Log.i("fail", "failed " + e.getMessage());
+                }
+            }
+        });
     }
 }

@@ -106,8 +106,11 @@ public class ClubListFragment extends Fragment implements View.OnClickListener {
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                    Log.i("Test", "You clicked " + returned_object.get(position).getString("clubName"));
+                    Intent intent = new Intent(getContext(), ClubHomeActivity.class);
+                    intent.putExtra("CLUBNAME", returned_object.get(position).getString("clubName"));
+                    startActivity(intent);
                 }
             });
         }
@@ -139,8 +142,11 @@ public class ClubListFragment extends Fragment implements View.OnClickListener {
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                    Log.i("Test", "You clicked " + returned_object.get(position).getString("clubName"));
+                    Intent intent = new Intent(getContext(), ClubHomeActivity.class);
+                    intent.putExtra("CLUBNAME", returned_object.get(position).getString("clubName"));
+                    startActivity(intent);
                 }
             });
         }
