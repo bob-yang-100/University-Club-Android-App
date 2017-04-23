@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void redirect() {
         if (ParseUser.getCurrentUser() != null) {
-            Intent intent = new Intent(getApplicationContext(), StudentHomeActivity.class);
+            Intent intent = new Intent(getApplicationContext(), PaymentsActivity.class);
             startActivity(intent);
         }
     }
