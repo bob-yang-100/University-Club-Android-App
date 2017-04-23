@@ -122,7 +122,8 @@ public class ClubListFragment extends Fragment implements View.OnClickListener {
         @Override
         protected Void doInBackground(String... params) {
             ParseQuery<ParseObject> query = new ParseQuery<>("Clubs");
-            query.whereContains("clubName", params[0]);
+            String searchData = params[0];
+            query.whereMatches("clubName", "("+searchData+")", "i");
             try {
                 returned_object = query.find();
             } catch (ParseException e) {
