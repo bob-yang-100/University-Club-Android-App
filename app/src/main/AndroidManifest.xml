@@ -29,8 +29,7 @@
         <activity
             android:name=".ClubHomeActivity"
             android:label="@string/title_activity_club_home"
-            android:parentActivityName=".StudentHomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:parentActivityName=".StudentHomeActivity" >
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
