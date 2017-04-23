@@ -6,6 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.parse.ParseUser;
 
 
 /**
@@ -28,7 +32,14 @@ public class StudentHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_student_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_student_home, container, false);
+
+        TextView tv = (TextView) view.findViewById(R.id.tvWelcome);
+        String message = ("Welcome, " + ParseUser.getCurrentUser().getString("fullName") + "!");
+        tv.setText(message);
+
+        return view;
     }
+
 
 }
